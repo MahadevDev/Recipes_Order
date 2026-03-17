@@ -1,6 +1,6 @@
 const getApiUrl = () => {
   // For production, use the deployed backend URL
-  return "https://recipes-order.onrender.com";
+  return "https://recipes-order-izer.onrender.com";
 };
 
 export const API_BASE_URL = getApiUrl();
