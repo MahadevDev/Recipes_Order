@@ -40,7 +40,7 @@ const Navbar = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`} id="navbarTogglerDemo01">
-        <a className="navbar-brand" href="#">Recipe Sharing App</a>
+        <button className="navbar-brand" style={{background: 'none', border: 'none', color: 'inherit', fontSize: 'inherit', fontFamily: 'inherit', padding: 0}}>Recipe Sharing App</button>
         {auth ? (
           <>
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">

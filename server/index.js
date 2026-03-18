@@ -14,13 +14,14 @@ const forgotPasswordRoutes = require('./routes/forgotPassword');
 const app = express();
 
 // === CORS Middleware ===
+
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim().replace(/\/$/, ''))
   : [
-      'https://acchu-recipes.vercel.app',
-      'https://acchu-recipes.onrender.com',
+      '',
       'http://localhost:3000',
       'http://localhost:3001',
+      'https://animated-duckanoo-94ee41.netlify.app'
     ];
 
 const corsOptions = {
@@ -58,33 +59,34 @@ app.use((req, res, next) => {
 });
 
 // === Built-in Middleware ===
+
 app.use(express.json()); // Parse incoming JSON
 
 // === Test Route ===
+
 app.get('/', (req, res) => {
   res.json({ message: 'Recipe Sharing Backend Running' });
 });
 
 // === Connect to MongoDB ===
+
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/recipe-sharing';
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('✅ MongoDB connected'))
+mongoose.connect(mongoURI)
+.then(() => console.log(' MongoDB connected'))
 .catch(err => {
-  console.error('❌ MongoDB connection error:', err.message);
-  console.log('Please make sure MongoDB is running or use MongoDB Atlas');
+  console.error(' MongoDB connection error:', err.message);
 });
 
 // === API Routes ===
+
 app.use('/auth', registerRoutes);
 app.use('/auth', loginRoutes);
 app.use('/auth', forgotPasswordRoutes);
 app.use('/auth', recipeRoutes);
 
 // === Start Server ===
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);

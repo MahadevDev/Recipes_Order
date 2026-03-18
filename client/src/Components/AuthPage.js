@@ -40,10 +40,7 @@ const AuthPage = ({ initialMode = "login" }) => {
   );
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const goToSlide = (index) => {
-    setCurrentSlide((index + carouselImages.length) % carouselImages.length);
-  };
-
+  
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
@@ -52,9 +49,7 @@ const AuthPage = ({ initialMode = "login" }) => {
     return () => clearInterval(timer);
   }, [carouselImages.length]);
 
-  const handlePrev = () => goToSlide(currentSlide - 1);
-  const handleNext = () => goToSlide(currentSlide + 1);
-
+  
   const normalizeEmail = (value) => value.trim().toLowerCase();
 
   const handleLoginSubmit = async (e) => {
