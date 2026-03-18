@@ -15,50 +15,13 @@ const app = express();
 
 // === CORS Middleware ===
 
-const allowedOrigins = process.env.CORS_ORIGINS
-  ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim().replace(/\/$/, ''))
-  : [
-      '',
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'https://animated-duckanoo-94ee41.netlify.app',
-      'https://recipes-order12.vercel.app',
-      'https://recipes-order-izer.onrender.com'
-    ];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-
-    // Check if origin is in allowed list
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    // Log for debugging
-    console.log(`CORS blocked origin: ${origin}`);
-    return callback(new Error(`Origin ${origin} not allowed by CORS`));
-  },
+// Simple CORS for development
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://animated-duckanoo-94ee41.netlify.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  exposedHeaders: ['Content-Type', 'Authorization'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
-
-// Apply CORS middleware
-app.use(cors(corsOptions));
-
-// ✅ Handle preflight requests safely
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    cors(corsOptions)(req, res, next);
-  } else {
-    next();
-  }
-});
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
 
 // === Built-in Middleware ===
 
