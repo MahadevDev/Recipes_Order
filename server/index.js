@@ -21,7 +21,9 @@ const allowedOrigins = process.env.CORS_ORIGINS
       '',
       'http://localhost:3000',
       'http://localhost:3001',
-      'https://animated-duckanoo-94ee41.netlify.app'
+      'https://animated-duckanoo-94ee41.netlify.app',
+      'https://recipes-order12.vercel.app',
+      'https://recipes-order-izer.onrender.com'
     ];
 
 const corsOptions = {
